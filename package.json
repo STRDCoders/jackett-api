@@ -9,6 +9,10 @@
     "run": "npm run build && npm run start",
     "depcheck": "depcheck"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/STRDCoders/jackett-api.git"
+  },
   "keywords": [
     "jackett",
     "api",
