@@ -1,1 +1,1 @@
-"# jackett-api" 
+# jackett-api 
