@@ -6,7 +6,7 @@ describe("Jackett Service", () => {
   let jackettService: JackettService;
   const settings: IJackettSettings = {
     connectionSettings: {
-      baseUrl: "https://baseurl.com",
+      baseUrl: "https://baseUrl.com",
       apiKey: "apiKey",
     },
     selfSignedSSL: true,
@@ -22,6 +22,18 @@ describe("Jackett Service", () => {
   });
 
   describe("getTorznabIndexers", () => {
-    it("Should return list of indexers when server responses valid data", async () => {});
+    it("Should return list of indexers when server responses valid data", async () => {
+      await jackettService.getTorznabIndexers();
+    });
+  });
+  describe("getConfiguredIndexers", () => {
+    it("Should return list of configured indexers when server responses valid data", async () => {
+      await jackettService.getConfiguredIndexers();
+    });
+  });
+  describe("searchAll", () => {
+    it("Should return list of RssResult by search query", async () => {
+      await jackettService.searchAll("the witcher");
+    });
   });
 });

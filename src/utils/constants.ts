@@ -5,7 +5,11 @@ export class Constants {
     static readonly apiParam = "apikey";
     static readonly getTorznabIndexers: IJackettApiUrlModel = {
       prefix: "/indexers/all/results/torznab",
-      suffix: "&t=indexers",
+      suffix: "t=indexers",
+    };
+    static readonly searchAll: IJackettApiUrlModel = {
+      prefix: "/indexers/all/results/torznab",
+      suffix: "t=search&q=",
     };
   };
 }

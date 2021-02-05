@@ -14,7 +14,7 @@ export class Commons {
       Constants.jackettAPI.apiParam +
       "=" +
       connectSetting.apiKey;
-    url += path.suffix !== undefined ? path.suffix : "";
+    url += path.suffix !== undefined ? "&" + path.suffix : "";
     return url;
   }
 }
