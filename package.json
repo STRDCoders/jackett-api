@@ -14,7 +14,8 @@
     "run": "node -r source-map-support/register dist/src/main.js",
     "start": "npm run build && npm run run",
     "test": "nyc mocha -r ts-node/register test/**/*.spec.ts --exit",
-    "depcheck": "depcheck"
+    "depcheck": "depcheck",
+    "lint": "eslint \"./{src,test}/**/*.ts\""
   },
   "repository": {
     "type": "git",
