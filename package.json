@@ -2,11 +2,11 @@
   "name": "jackettapi",
   "version": "1.0.0",
   "description": "An api for 'Jackett' server requests",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "lib/**/*.js",
-    "lib/**/*.d.ts",
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
     "README.md"
   ],
   "scripts": {
