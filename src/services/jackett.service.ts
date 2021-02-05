@@ -54,14 +54,29 @@ export class JackettService {
    */
   downloadTorrent() {}
 
+  getRssIndexer(indexerId: string) {}
+
   /**
-   * Search a query in given indexers
+   * Search a query and filter results by given indexers ids.
+   *
+   * @param query The search query to submit
+   * @param indexersId Array of index id's to filter the results with
+   * @return {Promise<Array<RssResultModel>>} Promise of filtered rss results
    */
-  searchIndexers() {}
+  async searchIndexers(
+    query: string,
+    indexersId: string[]
+  ): Promise<Array<RssResultModel>> {
+    const results = await this.searchAll(query);
+    return results.filter((rssResult) =>
+      indexersId.includes(rssResult.trackerId)
+    );
+  }
 
   /**
    * Search a query in all indexers
    *
+   * @param query The search query to submit
    * @return {Promise<Array<RssResultModel>>} Promise of rss results from all configured indexers
    */
   async searchAll(query: string): Promise<Array<RssResultModel>> {
