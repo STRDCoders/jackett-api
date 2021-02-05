@@ -13,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
+        node-version: [14.x]
 
     steps:
       - name: Checkout
@@ -27,8 +27,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Lint
-        run: npm run lint
+      - name: Run linters
+        uses: wearerequired/lint-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          eslint: true
+          prettier: true
+          auto_fix: true
 
       - name: Unit tests
         run: npm test
