@@ -37,3 +37,6 @@ typings/
 *.iml
 kubernetes/
 dist/
+
+# Github actions
+.github/
