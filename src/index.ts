@@ -1,1 +1,1 @@
-export { Jackett } from './jackett/jackett';
+export { JackettService } from "./services/jackett.service";
