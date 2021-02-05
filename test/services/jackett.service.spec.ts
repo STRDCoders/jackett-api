@@ -22,8 +22,6 @@ describe("Jackett Service", () => {
   });
 
   describe("getTorznabIndexers", () => {
-    it("Should return list of indexers when server responses valid data", async () => {
-      await jackettService.getTorznabIndexers();
-    });
+    it("Should return list of indexers when server responses valid data", async () => {});
   });
 });
