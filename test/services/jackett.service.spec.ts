@@ -11,6 +11,7 @@ import {
   IndexerType,
   RssResultModel,
   IJackettSettings,
+  TorznabIndexerModel,
 } from "../../src";
 import * as Path from "path";
 import { Constants } from "../../src/utils/constants";
@@ -61,34 +62,37 @@ describe("Jackett Service", () => {
     it("Should return list of indexers when server responses valid data", async () => {
       buildResponse("indexers.xml");
       const response = await jackettService.getTorznabIndexers();
+      const expected = [
+        new TorznabIndexerModel(
+          "indexerId1",
+          false,
+          "Title1",
+          "Description of Title1",
+          "https://indexer.com",
+          "fr-fr",
+          IndexerType.private
+        ),
+        new TorznabIndexerModel(
+          "indexerId2",
+          true,
+          "Title2",
+          "Description of Title2",
+          "https://indexer.com",
+          "en-us",
+          IndexerType.private
+        ),
+        new TorznabIndexerModel(
+          "indexerId3",
+          true,
+          "Title3",
+          "Description of Title3",
+          "https://indexer.com",
+          "en-us",
+          IndexerType.public
+        ),
+      ];
       expect(response.length).to.equal(3);
-      expect(response).to.deep.include({
-        _id: "indexerId1",
-        _configured: false,
-        _title: "Title1",
-        _description: "Description of Title1",
-        _link: "https://indexer.com",
-        _language: "fr-fr",
-        _type: IndexerType.private,
-      });
-      expect(response).to.deep.include({
-        _id: "indexerId2",
-        _configured: true,
-        _title: "Title2",
-        _description: "Description of Title2",
-        _link: "https://indexer.com",
-        _language: "en-us",
-        _type: IndexerType.private,
-      });
-      expect(response).to.deep.include({
-        _id: "indexerId3",
-        _configured: true,
-        _title: "Title3",
-        _description: "Description of Title3",
-        _link: "https://indexer.com",
-        _language: "en-us",
-        _type: IndexerType.public,
-      });
+      expect(response).to.deep.include.members(expected);
     });
   });
 
@@ -108,33 +112,36 @@ describe("Jackett Service", () => {
     it("Should return list of RssResult by search query", async () => {
       buildResponse("search_all.xml");
       const response = await jackettService.searchAll("query");
+      const expected = [
+        new RssResultModel(
+          "indexer1",
+          "indexerName1",
+          "The title",
+          new Date("2016-09-02T08:22:06.000Z"),
+          ["4050", "100009"],
+          "https://downloadlink.com",
+          35560322750,
+          11,
+          87175,
+          518,
+          522
+        ),
+        new RssResultModel(
+          "indexer2",
+          "indexerName2",
+          "The title 2",
+          new Date("2020-01-02T01:13:44.000Z"),
+          ["5000", "100065"],
+          "https://downloadlink.com",
+          146028888064,
+          0,
+          0,
+          67,
+          70
+        ),
+      ];
       expect(response.length).to.equal(2);
-      expect(response).to.deep.include({
-        _indexerId: "indexer1",
-        _indexerName: "indexerName1",
-        _title: "The title",
-        _publishDate: new Date("2016-09-02T08:22:06.000Z"),
-        _category: ["4050", "100009"],
-        _downloadLink: "https://downloadlink.com",
-        _size: "35560322750",
-        _fileCount: 11,
-        _grabs: 87175,
-        _seeders: "518",
-        _peers: "522",
-      });
-      expect(response).to.deep.include({
-        _indexerId: "indexer2",
-        _indexerName: "indexerName2",
-        _title: "The title 2",
-        _publishDate: new Date("2020-01-02T01:13:44.000Z"),
-        _category: ["5000", "100065"],
-        _downloadLink: "https://downloadlink.com",
-        _size: "146028888064",
-        _fileCount: 0,
-        _grabs: 0,
-        _seeders: "67",
-        _peers: "70",
-      });
+      expect(response).to.deep.include.members(expected);
     });
   });
 
@@ -153,33 +160,36 @@ describe("Jackett Service", () => {
       buildResponse("indexer_rss.xml");
       const result = await jackettService.getIndexerRss("indexer1");
       console.log(result);
+      const expected = [
+        new RssResultModel(
+          "indexer1",
+          "indexerName1",
+          "The title",
+          new Date("2016-09-02T08:22:06.000Z"),
+          ["4050", "100009"],
+          "https://downloadlink.com",
+          35560322750,
+          11,
+          87175,
+          518,
+          522
+        ),
+        new RssResultModel(
+          "indexer1",
+          "indexerName1",
+          "The title 2",
+          new Date("2020-01-02T01:13:44.000Z"),
+          ["5000", "100065"],
+          "https://downloadlink.com",
+          146028888064,
+          0,
+          0,
+          67,
+          70
+        ),
+      ];
       expect(result.length).to.equal(2);
-      expect(result).to.deep.include({
-        _indexerId: "indexer1",
-        _indexerName: "indexerName1",
-        _title: "The title",
-        _publishDate: new Date("2016-09-02T08:22:06.000Z"),
-        _category: ["4050", "100009"],
-        _downloadLink: "https://downloadlink.com",
-        _size: "35560322750",
-        _fileCount: 11,
-        _grabs: 87175,
-        _seeders: "518",
-        _peers: "522",
-      });
-      expect(result).to.deep.include({
-        _indexerId: "indexer1",
-        _indexerName: "indexerName1",
-        _title: "The title 2",
-        _publishDate: new Date("2020-01-02T01:13:44.000Z"),
-        _category: ["5000", "100065"],
-        _downloadLink: "https://downloadlink.com",
-        _size: "146028888064",
-        _fileCount: 0,
-        _grabs: 0,
-        _seeders: "67",
-        _peers: "70",
-      });
+      expect(result).to.deep.include.members(expected);
     });
     it("when indexer was not found should throw error", () => {});
     it("when indexer has not rss feeds should return empty array", () => {});

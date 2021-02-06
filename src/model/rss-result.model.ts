@@ -72,11 +72,11 @@ export class RssResultModel {
       new Date(data.pubDate[0]),
       data.category,
       data.enclosure[0].$.url,
-      data.enclosure[0].$.length,
+      Number(data.enclosure[0].$.length),
       data.files ? Number(data.files[0]) : 0,
       data.files ? Number(data.grabs[0]) : 0,
-      torznabData["seeders"],
-      torznabData["peers"]
+      Number(torznabData["seeders"]),
+      Number(torznabData["peers"])
     );
   }
 }

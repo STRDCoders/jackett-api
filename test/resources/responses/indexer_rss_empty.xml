@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="1.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:torznab="http://torznab.com/schemas/2015/feed">
+    <channel>
+        <atom:link href="http://baseUrl/jackett/" rel="self" type="application/rss+xml" />
+        <title>tracker</title>
+        <description>tracker desc</description>
+        <link>https://127.0.0.1</link>
+        <language>en-us</language>
+        <category>search</category>
+    </channel>
+</rss>
