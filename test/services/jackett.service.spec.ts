@@ -93,6 +93,7 @@ describe("Jackett Service", () => {
       ];
       expect(response.length).to.equal(3);
       expect(response).to.deep.include.members(expected);
+      /** To get 100% coverage, we run this test 1 time **/
       assertGettersTorznabIndexerModel(response[0], expected[0]);
     });
   });
@@ -143,6 +144,8 @@ describe("Jackett Service", () => {
       ];
       expect(response.length).to.equal(2);
       expect(response).to.deep.include.members(expected);
+      /** To get 100% coverage, we run this test 1 time **/
+      assertGettersRssResult(response[0], expected[0]);
     });
   });
 
@@ -253,7 +256,6 @@ describe("Jackett Service", () => {
     );
   };
 
-  /** To get 100% coverage, we run this test 1 time **/
   const assertGettersTorznabIndexerModel = (
     actual: TorznabIndexerModel,
     expected: TorznabIndexerModel
@@ -265,5 +267,22 @@ describe("Jackett Service", () => {
     expect(actual.link).to.equal(expected.link);
     expect(actual.title).to.equal(expected.title);
     expect(actual.type).to.equal(expected.type);
+  };
+
+  const assertGettersRssResult = (
+    actual: RssResultModel,
+    expected: RssResultModel
+  ) => {
+    expect(actual.downloadLink).to.equal(expected.downloadLink);
+    expect(actual.category).to.include.members(expected.category);
+    expect(actual.fileCount).to.equal(expected.fileCount);
+    expect(actual.grabs).to.equal(expected.grabs);
+    expect(actual.indexerId).to.equal(expected.indexerId);
+    expect(actual.indexerName).to.equal(expected.indexerName);
+    expect(actual.peers).to.equal(expected.peers);
+    expect(actual.publishDate).to.eql(expected.publishDate);
+    expect(actual.seeders).to.equal(expected.seeders);
+    expect(actual.size).to.equal(expected.size);
+    expect(actual.title).to.equal(expected.title);
   };
 });
