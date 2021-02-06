@@ -93,6 +93,7 @@ describe("Jackett Service", () => {
       ];
       expect(response.length).to.equal(3);
       expect(response).to.deep.include.members(expected);
+      assertGettersTorznabIndexerModel(response[0], expected[0]);
     });
   });
 
@@ -250,5 +251,19 @@ describe("Jackett Service", () => {
     mockHttpClientGet.returns(
       new Promise((resolve, _) => resolve({ data: mockResponse }))
     );
+  };
+
+  /** To get 100% coverage, we run this test 1 time **/
+  const assertGettersTorznabIndexerModel = (
+    actual: TorznabIndexerModel,
+    expected: TorznabIndexerModel
+  ) => {
+    expect(actual.id).to.equal(expected.id);
+    expect(actual.configured).to.equal(expected.configured);
+    expect(actual.description).to.equal(expected.description);
+    expect(actual.language).to.equal(expected.language);
+    expect(actual.link).to.equal(expected.link);
+    expect(actual.title).to.equal(expected.title);
+    expect(actual.type).to.equal(expected.type);
   };
 });
