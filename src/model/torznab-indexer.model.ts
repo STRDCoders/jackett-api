@@ -1,3 +1,8 @@
+export enum IndexerType {
+  private,
+  public,
+}
+
 export class TorznabIndexerModel {
   constructor(
     private _id: string,
@@ -6,7 +11,7 @@ export class TorznabIndexerModel {
     private _description: string,
     private _link: string,
     private _language: string,
-    private _type: string
+    private _type: IndexerType
   ) {}
 
   get id(): string {
@@ -33,7 +38,7 @@ export class TorznabIndexerModel {
     return this._language;
   }
 
-  get type(): string {
+  get type(): IndexerType {
     return this._type;
   }
 
@@ -45,7 +50,7 @@ export class TorznabIndexerModel {
       data?.description[0],
       data?.link[0],
       data?.language[0],
-      data?.type[0]
+      IndexerType[data?.type[0] as keyof typeof IndexerType]
     );
   }
 }

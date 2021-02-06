@@ -1,0 +1,172 @@
+<indexers>
+    <indexer id="indexerId1" configured="false">
+        <title>Title1</title>
+        <description>Description of Title1</description>
+        <link>https://indexer.com</link>
+        <language>fr-fr</language>
+        <type>private</type>
+        <caps>
+            <server title="Jackett"/>
+            <searching>
+                <search available="yes" supportedParams="q"/>
+                <tv-search available="yes" supportedParams="q,season,ep"/>
+                <movie-search available="yes" supportedParams="q"/>
+                <music-search available="yes" supportedParams="q"/>
+                <audio-search available="yes" supportedParams="q"/>
+                <book-search available="yes" supportedParams="q"/>
+            </searching>
+            <categories>
+                <category id="2000" name="Movies">
+                    <subcat id="2020" name="Movies/Other"/>
+                    <subcat id="2030" name="Movies/SD"/>
+                    <subcat id="2040" name="Movies/HD"/>
+                    <subcat id="2050" name="Movies/BluRay"/>
+                    <subcat id="2070" name="Movies/DVD"/>
+                </category>
+                <category id="3000" name="Audio">
+                    <subcat id="3010" name="Audio/MP3"/>
+                    <subcat id="3020" name="Audio/Video"/>
+                    <subcat id="3040" name="Audio/Lossless"/>
+                </category>
+                <category id="4000" name="PC">
+                    <subcat id="4050" name="PC/Games"/>
+                </category>
+                <category id="5000" name="TV">
+                    <subcat id="5030" name="TV/SD"/>
+                    <subcat id="5040" name="TV/HD"/>
+                    <subcat id="5050" name="TV/Other"/>
+                    <subcat id="5070" name="TV/Anime"/>
+                    <subcat id="5080" name="TV/Documentary"/>
+                </category>
+                <category id="7000" name="Books">
+                    <subcat id="7020" name="Books/EBook"/>
+                </category>
+                <category id="146976" name="ANIME"/>
+                <category id="123659" name="BDRIP"/>
+                <category id="138865" name="CONCERT"/>
+                <category id="128565" name="DVDR"/>
+                <category id="128495" name="DVDRIP"/>
+                <category id="150256" name="EBOOKS"/>
+                <category id="109370" name="FLAC"/>
+                <category id="130008" name="FULL BLURAY"/>
+                <category id="100153" name="GAMES"/>
+                <category id="110695" name="HD 1080P"/>
+                <category id="122334" name="HD 720P"/>
+                <category id="110688" name="MP3"/>
+                <category id="158430" name="PC"/>
+                <category id="102519" name="REMUX BLURAY"/>
+                <category id="128902" name="TV DOCS"/>
+                <category id="111419" name="TV EMISSIONS"/>
+                <category id="152539" name="TV HD VF"/>
+                <category id="135883" name="TV HD VOSTFR"/>
+                <category id="133995" name="TV PACK FR"/>
+                <category id="163781" name="TV PACK VOSTFR"/>
+                <category id="130747" name="TV SD VF"/>
+                <category id="141442" name="TV SD VOSTFR"/>
+                <category id="117690" name="VOSTFR"/>
+            </categories>
+        </caps>
+    </indexer>
+    <indexer id="indexerId2" configured="true">
+        <title>Title2</title>
+        <description>Description of Title2</description>
+        <link>https://indexer.com</link>
+        <language>en-us</language>
+        <type>private</type>
+        <caps>
+            <server title="Jackett"/>
+            <searching>
+                <search available="yes" supportedParams="q"/>
+                <tv-search available="yes" supportedParams="q,season,ep"/>
+                <movie-search available="yes" supportedParams="q,imdbid"/>
+                <music-search available="no" supportedParams="q"/>
+                <audio-search available="no" supportedParams="q"/>
+                <book-search available="no" supportedParams="q"/>
+            </searching>
+            <categories>
+                <category id="1000" name="Console">
+                    <subcat id="1030" name="Console/Wii"/>
+                    <subcat id="1040" name="Console/XBox"/>
+                    <subcat id="1180" name="Console/PS4"/>
+                </category>
+                <category id="2000" name="Movies">
+                    <subcat id="2030" name="Movies/SD"/>
+                    <subcat id="2040" name="Movies/HD"/>
+                    <subcat id="2045" name="Movies/UHD"/>
+                    <subcat id="2050" name="Movies/BluRay"/>
+                </category>
+                <category id="3000" name="Audio">
+                    <subcat id="3030" name="Audio/Audiobook"/>
+                    <subcat id="3050" name="Audio/Other"/>
+                </category>
+                <category id="4000" name="PC">
+                    <subcat id="4010" name="PC/0day"/>
+                    <subcat id="4030" name="PC/Mac"/>
+                    <subcat id="4040" name="PC/Mobile-Other"/>
+                    <subcat id="4050" name="PC/Games"/>
+                </category>
+                <category id="5000" name="TV">
+                    <subcat id="5030" name="TV/SD"/>
+                    <subcat id="5040" name="TV/HD"/>
+                    <subcat id="5045" name="TV/UHD"/>
+                    <subcat id="5070" name="TV/Anime"/>
+                </category>
+                <category id="6000" name="XXX"/>
+                <category id="7000" name="Books"/>
+                <category id="8000" name="Other"/>
+                <category id="100017" name="AnimeHD"/>
+                <category id="100016" name="AnimeSD"/>
+                <category id="100025" name="AppsMobile"/>
+                <category id="100022" name="AppsWindows"/>
+                <category id="100028" name="AudioBook"/>
+                <category id="100015" name="Bluray"/>
+                <category id="100027" name="eBook"/>
+                <category id="100021" name="GamesNin"/>
+                <category id="100018" name="GamesPC"/>
+                <category id="100020" name="GamesPS"/>
+                <category id="100019" name="GamesxBox"/>
+                <category id="100030" name="Misc"/>
+                <category id="100009" name="MovieHD"/>
+                <category id="100012" name="MoviePackHD"/>
+                <category id="100011" name="MoviePackSD"/>
+                <category id="100013" name="MoviePackUHD"/>
+                <category id="100008" name="MovieSD"/>
+                <category id="100010" name="MovieUHD"/>
+            </categories>
+        </caps>
+    </indexer>
+    <indexer id="indexerId3" configured="true">
+        <title>Title3</title>
+        <description>Description of Title3</description>
+        <link>https://indexer.com</link>
+        <language>en-us</language>
+        <type>public</type>
+        <caps>
+            <server title="Jackett"/>
+            <searching>
+                <search available="yes" supportedParams="q"/>
+                <tv-search available="no" supportedParams="q"/>
+                <movie-search available="no" supportedParams="q"/>
+                <music-search available="no" supportedParams="q"/>
+                <audio-search available="no" supportedParams="q"/>
+                <book-search available="no" supportedParams="q"/>
+            </searching>
+            <categories>
+                <category id="3000" name="Audio"/>
+                <category id="4000" name="PC">
+                    <subcat id="4030" name="PC/Mac"/>
+                    <subcat id="4060" name="PC/Mobile-iOS"/>
+                </category>
+                <category id="8000" name="Other"/>
+                <category id="100006" name="Audio"/>
+                <category id="100005" name="Graphics"/>
+                <category id="100003" name="iOS Apps"/>
+                <category id="100004" name="iOS Games"/>
+                <category id="100001" name="MacOS Apps"/>
+                <category id="100002" name="MacOS Games"/>
+                <category id="100008" name="Other"/>
+                <category id="100007" name="Tutorials"/>
+            </categories>
+        </caps>
+    </indexer>
+</indexers>

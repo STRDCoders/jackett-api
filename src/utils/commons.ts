@@ -2,20 +2,20 @@ import { IJackettApiUrlModel } from "../model/jackett-api-url.model";
 import { Constants } from "./constants";
 import { IJackettUrlSetting } from "../model/jackett-settings.model";
 
+const urlJoin = require("url-join");
+
 export class Commons {
   static buildUrl(
     path: IJackettApiUrlModel,
     connectSetting: IJackettUrlSetting,
     data?: any
   ) {
-    let url =
-      connectSetting.baseUrl +
-      path.prefix +
-      "?" +
-      Constants.jackettAPI.apiParam +
-      "=" +
-      connectSetting.apiKey;
-    url += path.suffix !== undefined ? "&" + path.suffix : "";
+    const url = urlJoin(
+      connectSetting.baseUrl,
+      path.prefix,
+      `?${Constants.jackettAPI.apiParam}=${connectSetting.apiKey}`,
+      path.suffix !== undefined ? `&${path.suffix}` : ""
+    );
     return data ? this.buildPlaceHolders(url, data) : url;
   }
 
@@ -27,9 +27,6 @@ export class Commons {
    * @return input Parsed string of the input & data.
    */
   static buildPlaceHolders(input: string, data: any): string {
-    input = input.replace(/%\w+%/g, (all) => (all in data ? data[all] : all));
-    console.log(input);
-
-    return input;
+    return input.replace(/%\w+%/g, (all) => (all in data ? data[all] : all));
   }
 }

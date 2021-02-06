@@ -45,7 +45,6 @@ export class JackettService {
   async getConfiguredIndexers(): Promise<Array<TorznabIndexerModel>> {
     const indexers = await this.getTorznabIndexers();
     const active = indexers.filter((indexer) => indexer.configured === true);
-    console.log(active);
     return active;
   }
 
@@ -69,7 +68,7 @@ export class JackettService {
   ): Promise<Array<RssResultModel>> {
     const results = await this.searchAll(query);
     return results.filter((rssResult) =>
-      indexersId.includes(rssResult.trackerId)
+      indexersId.includes(rssResult.indexerId)
     );
   }
 
@@ -83,8 +82,11 @@ export class JackettService {
     const response = await this.axios.get(
       Commons.buildUrl(
         Constants.jackettAPI.searchAll,
-        this.settings.connectionSettings
-      ) + encodeURIComponent(query)
+        this.settings.connectionSettings,
+        {
+          "%query%": encodeURIComponent(query),
+        }
+      )
     );
     const parsedData = await parseString(response.data);
     return parsedData.rss.channel[0].item.map((rssItem) =>

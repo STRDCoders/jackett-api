@@ -1,7 +1,5 @@
 # jackett-api
 
-## Adding new IJackettApiUrlModel
+## Jackett Version
 
-- prefix should not end with '/'
-- query parameters should be in the suffix parameter
-- query parameters should start
+The code has been tested on Jackett versions: v0.17.xx

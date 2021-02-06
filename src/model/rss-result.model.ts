@@ -1,7 +1,7 @@
 export class RssResultModel {
   constructor(
-    private _trackerId: string,
-    private _trackerName: string,
+    private _indexerId: string,
+    private _indexerName: string,
     private _title: string,
     private _publishDate: Date,
     private _category: string[],
@@ -14,12 +14,12 @@ export class RssResultModel {
     private _peers: number
   ) {}
 
-  get trackerId(): string {
-    return this._trackerId;
+  get indexerId(): string {
+    return this._indexerId;
   }
 
-  get trackerName(): string {
-    return this._trackerName;
+  get indexerName(): string {
+    return this._indexerName;
   }
 
   get title(): string {
@@ -66,8 +66,8 @@ export class RssResultModel {
       })
     );
     return new RssResultModel(
-      data.jackettindexer[0]._,
       data.jackettindexer[0].$.id,
+      data.jackettindexer[0]._,
       data.title[0],
       new Date(data.pubDate[0]),
       data.category,
