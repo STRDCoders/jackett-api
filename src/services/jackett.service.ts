@@ -5,6 +5,8 @@ import { Commons } from "../utils/commons";
 import * as https from "https";
 import { TorznabIndexerModel } from "../model/torznab-indexer.model";
 import { RssResultModel } from "../model/rss-result.model";
+import * as Path from "path";
+import * as Fs from "fs";
 
 const parseString = require("xml2js").parseStringPromise;
 
@@ -44,16 +46,63 @@ export class JackettService {
    */
   async getConfiguredIndexers(): Promise<Array<TorznabIndexerModel>> {
     const indexers = await this.getTorznabIndexers();
-    const active = indexers.filter((indexer) => indexer.configured === true);
-    return active;
+    return indexers.filter((indexer) => indexer.configured === true);
   }
 
   /**
-   * Downloads a torrent file of given torrent result.
+   * Downloads a torrent file of given RssResultModel & saves it on given downloadFolderPath.
+   *
+   * @param rssResult The model of the desired torrent to download
+   * @param downloadFolderPath base dir for the file to be saved in
+   * @return promise of the download process
    */
-  downloadTorrent() {}
+  async downloadTorrent(
+    rssResult: RssResultModel,
+    downloadFolderPath: string
+  ): Promise<void> {
+    const fileName = rssResult.downloadLink.substr(
+      rssResult.downloadLink.lastIndexOf(
+        Constants.jackettAPI.downloadFilePrefixNamePattern
+      ) + Constants.jackettAPI.downloadFilePrefixNamePattern.length
+    );
+    const path = Path.resolve(
+      downloadFolderPath,
+      `${fileName}${Constants.downloadSettings.downloadNameSuffix}`
+    );
+    const writer = Fs.createWriteStream(path);
+    const response = await this.axios.get(rssResult.downloadLink, {
+      responseType: "stream",
+    });
 
-  getRssIndexer(indexerId: string) {}
+    response.data.pipe(writer);
+
+    return new Promise<void>((resolve, reject) => {
+      writer.on("finish", resolve);
+      writer.on("error", reject);
+    });
+  }
+
+  /**
+   * Fetch the latest Rss feed from a given indexer.
+   *
+   * @param indexerId Id of the indexer to fetch Rss feed from
+   * @return Promise<Array<RssResultModel>> Rss results from the feed of the indexer
+   */
+  async getIndexerRss(indexerId: string): Promise<Array<RssResultModel>> {
+    const response = await this.axios.get(
+      Commons.buildUrl(
+        Constants.jackettAPI.getIndexerRss,
+        this.settings.connectionSettings,
+        {
+          "%indexerId%": indexerId,
+        }
+      )
+    );
+    const parsedData = await parseString(response.data);
+    return parsedData.rss.channel[0].item.map((rssItem) =>
+      RssResultModel.fromJson(rssItem)
+    );
+  }
 
   /**
    * Search a query and filter results by given indexers ids.

@@ -1,10 +1,8 @@
-import { Commons } from "../../src/utils/commons";
-import { Constants } from "../../src/utils/constants";
-
-import { IJackettUrlSetting } from "../../src/model/jackett-settings.model";
-import { IJackettApiUrlModel } from "../../src/model/jackett-api-url.model";
 import { expect } from "chai";
 import * as Sinon from "sinon";
+import { Commons } from "../../src/utils/commons";
+import { Constants } from "../../src/utils/constants";
+import { IJackettUrlSetting, IJackettApiUrlModel } from "../../src";
 
 describe("Commons", () => {
   describe("buildUrl", () => {
