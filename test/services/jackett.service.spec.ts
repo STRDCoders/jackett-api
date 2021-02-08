@@ -15,6 +15,7 @@ import {
 } from "../../src";
 import * as Path from "path";
 import { Constants } from "../../src/utils/constants";
+import { Commons } from "../../src/utils/commons";
 
 chai.use(chaiAsPromised);
 chai.use(require("sinon-chai"));
@@ -54,8 +55,36 @@ describe("Jackett Service", () => {
   });
 
   describe("axios init", () => {
-    it("should set 'rejectUnauthorized' of agent to false when 'IJackettSettings.selfSignedSSL' true", () => {});
-    it("should set 'rejectUnauthorized' of agent to true when 'IJackettSettings.selfSignedSSL' false", () => {});
+    it("should set 'rejectUnauthorized' of agent to false when 'IJackettSettings.selfSignedSSL' true", () => {
+      sandbox.restore(); // Ignore all stubbing, let the service build the axios instance
+      const axiosSpy = sandbox.spy(Axios, "create");
+      new JackettService({
+        connectionSettings: {
+          apiKey: "",
+          baseUrl: "",
+        },
+        selfSignedSSL: true,
+      });
+      expect(
+        (axiosSpy.firstCall.firstArg.httpsAgent as https.Agent).options
+          .rejectUnauthorized
+      ).to.be.false;
+    });
+    it("should set 'rejectUnauthorized' of agent to true when 'IJackettSettings.selfSignedSSL' false", () => {
+      sandbox.restore(); // Ignore all stubbing, let the service build the axios instance
+      const axiosSpy = sandbox.spy(Axios, "create");
+      new JackettService({
+        connectionSettings: {
+          apiKey: "",
+          baseUrl: "",
+        },
+        selfSignedSSL: false,
+      });
+      expect(
+        (axiosSpy.firstCall.firstArg.httpsAgent as https.Agent).options
+          .rejectUnauthorized
+      ).to.be.true;
+    });
   });
 
   describe("getTorznabIndexers", () => {
@@ -101,7 +130,18 @@ describe("Jackett Service", () => {
   describe("getConfiguredIndexers", () => {
     it("Should return list of configured indexers when server responses valid data", async () => {
       buildResponse("indexers.xml");
+      const getTorznabIndexersSpy = sandbox.spy(
+        jackettService,
+        "getTorznabIndexers"
+      );
       const response = await jackettService.getConfiguredIndexers();
+      expect(getTorznabIndexersSpy).to.have.been.calledOnce;
+      expect(mockHttpClientGet).to.have.been.calledOnceWithExactly(
+        Commons.buildUrl(
+          Constants.jackettAPI.getTorznabIndexers,
+          settings.connectionSettings
+        )
+      );
       expect(response.length).to.equal(2);
       expect(response.map((indexer) => indexer.id)).to.have.members([
         "indexerId2",
@@ -113,7 +153,8 @@ describe("Jackett Service", () => {
   describe("searchAll", () => {
     it("Should return list of RssResult by search query", async () => {
       buildResponse("search_all.xml");
-      const response = await jackettService.searchAll("query");
+      const searchQuery = "query";
+      const response = await jackettService.searchAll(searchQuery);
       const expected = [
         new RssResultModel(
           "indexer1",
@@ -142,6 +183,15 @@ describe("Jackett Service", () => {
           70
         ),
       ];
+      expect(mockHttpClientGet).to.have.been.calledOnceWithExactly(
+        Commons.buildUrl(
+          Constants.jackettAPI.searchAll,
+          settings.connectionSettings,
+          {
+            "%query%": encodeURIComponent(searchQuery),
+          }
+        )
+      );
       expect(response.length).to.equal(2);
       expect(response).to.deep.include.members(expected);
       /** To get 100% coverage, we run this test 1 time **/
@@ -152,9 +202,13 @@ describe("Jackett Service", () => {
   describe("searchIndexers", () => {
     it("Should return filtered rssResults by given indexerIds", async () => {
       buildResponse("search_all.xml");
-      const response = await jackettService.searchIndexers("query", [
+      const searchQuery = "query";
+      const searchAllSpy = sandbox.spy(jackettService, "searchAll");
+      const response = await jackettService.searchIndexers(searchQuery, [
         "indexer1",
       ]);
+      expect(searchAllSpy).to.have.been.calledOnceWithExactly(searchQuery);
+      expect(mockHttpClientGet).to.have.been.calledOnce;
       expect(response.length).to.equal(1);
     });
   });
@@ -163,7 +217,6 @@ describe("Jackett Service", () => {
     it("should fetch indexer's Rss when valid index id is provided", async () => {
       buildResponse("indexer_rss.xml");
       const result = await jackettService.getIndexerRss("indexer1");
-      console.log(result);
       const expected = [
         new RssResultModel(
           "indexer1",
@@ -193,6 +246,15 @@ describe("Jackett Service", () => {
         ),
       ];
       expect(result.length).to.equal(2);
+      expect(mockHttpClientGet).to.have.been.calledOnceWithExactly(
+        Commons.buildUrl(
+          Constants.jackettAPI.getIndexerRss,
+          settings.connectionSettings,
+          {
+            "%indexerId%": expected[0].indexerId,
+          }
+        )
+      );
       expect(result).to.deep.include.members(expected);
     });
     it("when indexer was not found should throw error", () => {});
