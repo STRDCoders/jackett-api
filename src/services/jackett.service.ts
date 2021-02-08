@@ -142,4 +142,19 @@ export class JackettService {
       RssResultModel.fromJson(rssItem)
     );
   }
+
+  /**
+   * Validate connection to the Jackett server.
+   * Sends a request to fetch data to see how the server behaves & tries to parse it to validate the content.
+   *
+   * @return Promise<boolean> State of the server connectivity
+   */
+  async isValidServer(): Promise<boolean> {
+    return this.searchAll(Constants.jackettAPI.dummyValidationSearchQuery)
+      .then(() => {
+        parseString(parseString);
+        return true;
+      })
+      .catch(() => false);
+  }
 }

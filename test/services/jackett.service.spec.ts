@@ -1,21 +1,21 @@
 import chai = require("chai");
 import chaiAsPromised = require("chai-as-promised");
-import { SinonSandbox, SinonStub } from "sinon";
 import * as Sinon from "sinon";
-import Axios from "axios";
-const fs = require("fs");
-
+import { SinonSandbox, SinonStub } from "sinon";
+import Axios, { AxiosError } from "axios";
 import * as https from "https";
 import {
-  JackettService,
-  IndexerType,
-  RssResultModel,
   IJackettSettings,
+  IndexerType,
+  JackettService,
+  RssResultModel,
   TorznabIndexerModel,
 } from "../../src";
 import * as Path from "path";
 import { Constants } from "../../src/utils/constants";
 import { Commons } from "../../src/utils/commons";
+
+const fs = require("fs");
 
 chai.use(chaiAsPromised);
 chai.use(require("sinon-chai"));
@@ -257,7 +257,9 @@ describe("Jackett Service", () => {
       );
       expect(result).to.deep.include.members(expected);
     });
-    it("when indexer was not found should throw error", () => {});
+    it("when indexer was not found should throw error", async () => {
+      await jackettService.getIndexerRss("fakeIndexer");
+    });
     it("when indexer has not rss feeds should return empty array", () => {});
   });
 
@@ -301,6 +303,34 @@ describe("Jackett Service", () => {
       );
       expect(responseStub.pipe).to.have.been.calledOnceWithExactly(writer);
     });
+  });
+
+  describe("isValidServer", () => {
+    let searchAllSpy;
+    beforeEach(() => {
+      searchAllSpy = sandbox.spy(jackettService, "searchAll");
+    });
+    afterEach(() => {
+      expect(searchAllSpy).to.be.calledOnceWithExactly(
+        Constants.jackettAPI.dummyValidationSearchQuery
+      );
+    });
+    it("Should return true if the server responded with valid data and status", () => {});
+    it("Should return false if the server responded with an error", async () => {
+      const httpResponse: AxiosError = {
+        name: "error",
+        code: "404",
+        message: "error",
+        isAxiosError: true,
+        config: null,
+        request: null,
+        toJSON: null,
+      };
+      mockHttpClientGet.rejects(httpResponse);
+      const returnedValue = await jackettService.isValidServer();
+      expect(returnedValue).to.be.false;
+    });
+    it("Should return false if the server responded with non xml data", () => {});
   });
 
   /**
