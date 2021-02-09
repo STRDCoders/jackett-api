@@ -197,6 +197,10 @@ describe("Jackett Service", () => {
       /** To get 100% coverage, we run this test 1 time **/
       assertGettersRssResult(response[0], expected[0]);
     });
+    it("should return empty array when no rssResults were found", async () => {
+      buildResponse("indexer_rss_empty.xml");
+      expect(await jackettService.getIndexerRss("indexer")).to.eql([]);
+    });
   });
 
   describe("searchIndexers", () => {
@@ -210,6 +214,17 @@ describe("Jackett Service", () => {
       expect(searchAllSpy).to.have.been.calledOnceWithExactly(searchQuery);
       expect(mockHttpClientGet).to.have.been.calledOnce;
       expect(response.length).to.equal(1);
+    });
+    it("should return empty array when no results found for the given indexes", async () => {
+      buildResponse("search_all.xml");
+      const searchQuery = "query";
+      const searchAllSpy = sandbox.spy(jackettService, "searchAll");
+      const response = await jackettService.searchIndexers(searchQuery, [
+        "unknownIndexer",
+      ]);
+      expect(searchAllSpy).to.have.been.calledOnceWithExactly(searchQuery);
+      expect(mockHttpClientGet).to.have.been.calledOnce;
+      expect(response.length).to.equal(0);
     });
   });
 
@@ -258,9 +273,13 @@ describe("Jackett Service", () => {
       expect(result).to.deep.include.members(expected);
     });
     it("when indexer was not found should throw error", async () => {
-      await jackettService.getIndexerRss("fakeIndexer");
+      mockHttpClientGet.rejects(new Error("500 code"));
+      await expect(jackettService.getIndexerRss("fakeIndexer")).to.be.rejected;
     });
-    it("when indexer has not rss feeds should return empty array", () => {});
+    it("when indexer has not rss feeds should return empty array", async () => {
+      buildResponse("indexer_rss_empty.xml");
+      expect(await jackettService.getIndexerRss("indexer")).to.eql([]);
+    });
   });
 
   describe("downloadTorrent", () => {
@@ -315,7 +334,14 @@ describe("Jackett Service", () => {
         Constants.jackettAPI.dummyValidationSearchQuery
       );
     });
-    it("Should return true if the server responded with valid data and status", () => {});
+    it("Should return true if the server responded with valid data and status", async () => {
+      buildResponse("indexer_rss_empty.xml");
+      const isValid = await jackettService.isValidServer();
+      expect(isValid).to.be.true;
+      expect(searchAllSpy).to.be.calledOnceWithExactly(
+        Constants.jackettAPI.dummyValidationSearchQuery
+      );
+    });
     it("Should return false if the server responded with an error", async () => {
       const httpResponse: AxiosError = {
         name: "error",
@@ -329,8 +355,15 @@ describe("Jackett Service", () => {
       mockHttpClientGet.rejects(httpResponse);
       const returnedValue = await jackettService.isValidServer();
       expect(returnedValue).to.be.false;
+      expect(searchAllSpy).to.be.calledOnceWithExactly(
+        Constants.jackettAPI.dummyValidationSearchQuery
+      );
     });
-    it("Should return false if the server responded with non xml data", () => {});
+    it("Should return false if the server responded with non xml data", async () => {
+      buildResponse("nonXml");
+      const returnedValue = await jackettService.isValidServer();
+      expect(returnedValue).to.be.false;
+    });
   });
 
   /**

@@ -99,6 +99,9 @@ export class JackettService {
       )
     );
     const parsedData = await parseString(response.data);
+    if (!parsedData.rss.channel[0]?.item) {
+      return [];
+    }
     return parsedData.rss.channel[0].item.map((rssItem) =>
       RssResultModel.fromJson(rssItem)
     );
@@ -138,6 +141,9 @@ export class JackettService {
       )
     );
     const parsedData = await parseString(response.data);
+    if (!parsedData.rss.channel[0]?.item) {
+      return [];
+    }
     return parsedData.rss.channel[0].item.map((rssItem) =>
       RssResultModel.fromJson(rssItem)
     );
@@ -147,7 +153,7 @@ export class JackettService {
    * Validate connection to the Jackett server.
    * Sends a request to fetch data to see how the server behaves & tries to parse it to validate the content.
    *
-   * @return Promise<boolean> State of the server connectivity
+   * @return {Promise<boolean>} State of the server connectivity
    */
   async isValidServer(): Promise<boolean> {
     return this.searchAll(Constants.jackettAPI.dummyValidationSearchQuery)
