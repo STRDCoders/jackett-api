@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="1.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:torznab="http://torznab.com/schemas/2015/feed">
+  <channel>
+    <atom:link href="http://jackettUrl/" rel="self" type="application/rss+xml" />
+    <title>AggregateSearch</title>
+    <description>This feed includes all configured indexers</description>
+    <link>http://127.0.0.1/</link>
+    <language>en-us</language>
+    <category>search</category>
+    <item>
+      <title>The title</title>
+      <guid>https://indexer.com</guid>
+      <jackettindexer id="indexer1">indexerName1</jackettindexer>
+      <comments>torrent comments</comments>
+      <pubDate>Fri, 02 Sep 2016 10:22:06 +0200</pubDate>
+      <size>35560322750</size>
+      <files>11</files>
+      <grabs>87175</grabs>
+      <description />
+      <link>https://downloadlink.com</link>
+      <category>4050</category>
+      <category>100009</category>
+      <enclosure url="https://downloadlink.com" length="35560322750" type="application/x-bittorrent" />
+      <torznab:attr name="category" value="4050" />
+      <torznab:attr name="category" value="100009" />
+      <torznab:attr name="seeders" value="518" />
+      <torznab:attr name="peers" value="522" />
+      <torznab:attr name="minimumratio" value="1" />
+      <torznab:attr name="minimumseedtime" value="172800" />
+      <torznab:attr name="downloadvolumefactor" value="1" />
+      <torznab:attr name="uploadvolumefactor" value="1" />
+    </item>
+    <item>
+      <title>The title 2</title>
+      <guid>https://indexer2.com</guid>
+      <jackettindexer id="indexer2">indexerName2</jackettindexer>
+      <comments>torrent comment</comments>
+      <pubDate>Thu, 02 Jan 2020 02:13:44 +0100</pubDate>
+      <size>146028888064</size>
+      <grabs>2167</grabs>
+      <description>Some description</description>
+      <link>https://downloadlink.com</link>
+      <category>5000</category>
+      <category>100065</category>
+      <enclosure url="https://downloadlink.com" length="146028888064" type="application/x-bittorrent" />
+      <torznab:attr name="category" value="5000" />
+      <torznab:attr name="category" value="100065" />
+      <torznab:attr name="seeders" value="67" />
+      <torznab:attr name="peers" value="70" />
+      <torznab:attr name="minimumratio" value="1" />
+      <torznab:attr name="minimumseedtime" value="1209600" />
+      <torznab:attr name="downloadvolumefactor" value="0" />
+      <torznab:attr name="uploadvolumefactor" value="1" />
+    </item>
+  </channel>
+</rss>

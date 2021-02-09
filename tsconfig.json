@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2019",
     "module": "commonjs",
-    "declaration": true,
-    "outDir": "./lib",
-    "strict": false
+    "target": "es2017",
+    "outDir": "./dist/src",
+    "sourceMap": true,
+    "removeComments": false,
+    "declaration": true
   },
   "include": ["src/**/*"]
 }

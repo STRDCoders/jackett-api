@@ -36,6 +36,7 @@ typings/
 .DS_Store
 *.iml
 kubernetes/
+dist/
 
 # Github actions
 .github/
