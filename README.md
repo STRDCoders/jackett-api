@@ -14,6 +14,10 @@ The package provides a simple API to communicate with a Jackett server.
 | getIndexerRss | Promise\<Array\<RssResultModel\>\> | Fetches a list of torrent results from an Rss feed of a given indexer | - HTTP Error <br/> - parsing error |
 | downloadTorrent | Promise\<void\> | Downloads a torrent frile of a given RssResult | - HTTP Error <br/> - parsing error <br/> - FileSystem errors(Ex. Permissions) |
 
+## Error handling
+
+The API returns promises and it is the implementors responsibility to catch any exception thrown in the process. A list of possible exceptions can be found for each method on the “Usage Overview” section.
+
 
 ## Jackett Version
 
