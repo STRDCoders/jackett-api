@@ -16,7 +16,7 @@ The package provides a simple API to communicate with a Jackett server.
 
 ## Error handling
 
-The API returns promises and it is the implementors responsibility to catch any exception thrown in the process. A list of possible exceptions can be found for each method on the “Usage Overview” section.
+The API returns promises and it is the implementor׳s responsibility to catch any exception thrown in the process. A list of possible exceptions can be found for each method on the “Usage Overview” section.
 
 
 ## Jackett Version
