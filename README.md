@@ -18,7 +18,51 @@ The package provides a simple API to communicate with a Jackett server.
 
 The API returns promises and it is the implementor׳s responsibility to catch any exception thrown in the process. A list of possible exceptions can be found for each method on the “Usage Overview” section.
 
+## DTO Structure
 
+### RssResultModel
+Represnting a single Rss result item.
+
+```typescript
+class RssResultModel {
+    private _indexerId: string,
+    private _indexerName: string,
+    private _title: string,
+    private _publishDate: Date,
+    private _category: string[],
+    private _downloadLink: string,
+    /** _size Size of the torrent content **/
+    private _size: number,
+    private _fileCount: number,
+    private _grabs: number,
+    private _seeders: number,
+    private _peers: number
+}
+```
+
+### TorznabIndexerModel
+Representing a Jackett Indexer.
+
+``` typescript
+class TorznabIndexerModel {
+    private _id: string,
+    private _configured: boolean,
+    private _title: string,
+    private _description: string,
+    private _link: string,
+    private _language: string,
+    private _type: IndexerType
+}
+```
+#### IndexerType
+The type of an indexer
+
+```typescript 
+enum IndexerType {
+  private,
+  public,
+}
+```
 ## Jackett Version
 
 The code has been tested on Jackett versions: v0.17.xx
