@@ -63,6 +63,27 @@ enum IndexerType {
   public,
 }
 ```
+
+## Initialize example
+```typescript
+const jackettService: JackettService = new JackettService({
+  connectionSettings: {
+    baseUrl: "https://baseurl.com/jackett/api/v2.0/",
+    apiKey: "apikey",
+  },
+  selfSignedSSL: true,
+});
+```
+
+The service requires 3 properties to initialize properly:
+1. ```baseUrl``` - The base url of your Jackett service.<br/>
+**Important:** your path needs to include the the api base. It would probably be something like: ```/jackett/api/v2.0/```
+
+2. ```apiKey``` - Your API key from Jackett.
+
+3. ```selfSignedSSL``` - The http client this package uses will reject self signed SSL certificates by default. 
+If your Jackett service is hosted with self signed ssl, set this to ```true``` to allow the connection, otherwise set it to ```false```.
+
 ## Jackett Version
 
 The code has been tested on Jackett versions: v0.17.xx
