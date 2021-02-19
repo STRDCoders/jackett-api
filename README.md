@@ -9,11 +9,11 @@ The package provides a simple API to communicate with a Jackett server.
 | Function      | Returns       |Description|Exceptions|
 | ------------- | ------------- |-----------|----------|
 | **isValidServer**  | Promise \<boolean\>  | Sends an HTTP request to test the connection to the server & tries to parse the result(Tests XML type) ||
-| **getTorznabIndexers**  | Promise\<Array\<TorznabIndexerModel\>\>  | Fetches a list of all **supported** trackers on Jackett | - HTTP Error <br/> - parse error |
-| **getConfiguredIndexers**  | Promise\<Array\<TorznabIndexerModel\>\>  | Fetches a list of all **configured** trackers on Jackett | - HTTP Error <br/> - parse error | 
+| **getTorznabIndexers**  | Promise\<Array\<[TorznabIndexerModel](#torznabindexermodel)\>\>  | Fetches a list of all **supported** trackers on Jackett | - HTTP Error <br/> - parse error |
+| **getConfiguredIndexers**  | Promise\<Array\<[TorznabIndexerModel](#torznabindexermodel)\>\>  | Fetches a list of all **configured** trackers on Jackett | - HTTP Error <br/> - parse error | 
 | **searchAll** | Promise\<Array\<[RssResultModel](#rssresultmodel)\>\> | Fetches a list of torrent results, by a given search query, from all configured trackers combined | - HTTP Error <br/> - parse error |
-| **searchIndexers** | Promise\<Array\<RssResultModel\>\> | Fetches a list of torrent results, by a given search query, from the specific indexers | - HTTP Error <br/> - parse error |
-| **getIndexerRss** | Promise\<Array\<RssResultModel\>\> | Fetches a list of torrent results from an Rss feed of a given indexer | - HTTP Error <br/> - parse error |
+| **searchIndexers** | Promise\<Array\<[RssResultModel](#rssresultmodel)\>\> | Fetches a list of torrent results, by a given search query, from the specific indexers | - HTTP Error <br/> - parse error |
+| **getIndexerRss** | Promise\<Array\<[RssResultModel](#rssresultmodel)\>\> | Fetches a list of torrent results from an Rss feed of a given indexer | - HTTP Error <br/> - parse error |
 | **downloadTorrent** | Promise\<void\> | Downloads a torrent frile of a given RssResult | - HTTP Error <br/> - parse error <br/> - FileSystem errors(Ex. Permissions) |
 
 ## Error handling
