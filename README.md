@@ -1,5 +1,7 @@
 # jackett-api
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=STRDCoders_jackett-api&metric=alert_status)](https://sonarcloud.io/dashboard?id=STRDCoders_jackett-api)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=STRDCoders_jackett-api&metric=coverage)](https://sonarcloud.io/dashboard?id=STRDCoders_jackett-api)
 ## Overview
 The package provides a simple API to communicate with a Jackett server.
 
