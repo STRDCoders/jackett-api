@@ -12,13 +12,13 @@ The package provides a simple API to communicate with a Jackett server.
 | **getTorznabIndexers**  | Promise\<Array\<[TorznabIndexerModel](#torznabindexermodel)\>\>  | Fetches a list of all **supported** trackers on Jackett | - HTTP Error <br/> - parse error |
 | **getConfiguredIndexers**  | Promise\<Array\<[TorznabIndexerModel](#torznabindexermodel)\>\>  | Fetches a list of all **configured** trackers on Jackett | - HTTP Error <br/> - parse error | 
 | **searchAll** | Promise\<Array\<[RssResultModel](#rssresultmodel)\>\> | Fetches a list of torrent results, by a given search query, from all configured trackers combined | - HTTP Error <br/> - parse error |
-| **searchIndexers** | Promise\<Array\<[RssResultModel](#rssresultmodel)\>\> | Fetches a list of torrent results, by a given search query, from the specific indexers | - HTTP Error <br/> - parse error |
+| **searchIndexers** | Promise\<Array\<[RssResultModel](#rssresultmodel)\>\> | Fetches a list of torrent results, by a given search query, from given indexers | - HTTP Error <br/> - parse error |
 | **getIndexerRss** | Promise\<Array\<[RssResultModel](#rssresultmodel)\>\> | Fetches a list of torrent results from an Rss feed of a given indexer | - HTTP Error <br/> - parse error |
 | **downloadTorrent** | Promise\<void\> | Downloads a torrent frile of a given RssResult | - HTTP Error <br/> - parse error <br/> - FileSystem errors(Ex. Permissions) |
 
 ## Error handling
 
-The API returns promises and it is the implementor׳s responsibility to catch any exception thrown in the process. A list of possible exceptions can be found for each method on the “Usage Overview” section.
+The API returns promises and it is the implementor׳s responsibility to catch any exception thrown in the process. A list of possible exceptions can be found for each method on the [Usage Overview](#usage-overview) section.
 
 ## DTO Structure
 
@@ -78,8 +78,8 @@ const jackettService: JackettService = new JackettService({
 ```
 
 The service requires 3 properties to initialize properly:
-1. ```baseUrl``` - The base url of your Jackett service.<br/>
-**Important:** your path needs to include the the api base. It would probably be something like: ```/jackett/api/v2.0/```
+1. ```baseUrl``` - The base url of the Jackett service.<br/>
+**Important:** your path needs to include the api base. It would probably be something like: ```/jackett/api/v2.0/```
 
 2. ```apiKey``` - Your API key from Jackett.
 
