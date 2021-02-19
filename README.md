@@ -23,7 +23,7 @@ The API returns promises and it is the implementor׳s responsibility to catch an
 ## DTO Structure
 
 ### RssResultModel
-Represnting a single Rss result item.
+Represnting an Rss result item.
 
 ```typescript
 class RssResultModel {
