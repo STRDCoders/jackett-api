@@ -9,7 +9,7 @@ The package provides a simple API to communicate with a Jackett server.
 | Function      | Returns       |Description|Exceptions|
 | ------------- | ------------- |-----------|----------|
 | isValidServer  | Promise \<boolean\>  | Sends an HTTP request to test the connection to the server & tries to parse the result(Tests XML type) ||
-| getTorznabIndexers  | Promise\<Array\<TorznabIndexerModel\>\>  | Fetches a list of all **supported** trackers on Jackett | - HTTP Error <br/> - parsing error |
+| getTorznabIndexers  | Promise\<Array\<TorznabIndexerModel\>\>  | Fetches a list of all **supported** trackers on Jackett | - HTTP Error <br/> - parse error |
 | getConfiguredIndexers  | Promise\<Array\<TorznabIndexerModel\>\>  | Fetches a list of all **configured** trackers on Jackett | - HTTP Error <br/> - parsing error | 
 | searchAll | Promise\<Array\<RssResultModel\>\> | Fetches a list of torrent results, by a given search query, from all configured trackers combined | - HTTP Error <br/> - parsing error |
 | searchIndexers | Promise\<Array\<RssResultModel\>\> | Fetches a list of torrent results, by a given search query, from the specific indexers | - HTTP Error <br/> - parsing error |
