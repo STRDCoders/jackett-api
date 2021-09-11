@@ -31,7 +31,7 @@
   "author": "STRDcoders",
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "depcheck": "^1.4.1",
     "nyc": "^15.1.0",
     "source-map-support": "^0.5.19",
