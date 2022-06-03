@@ -10,3 +10,7 @@ updates:
     schedule:
       interval: "weekly"
     rebase-strategy: "auto"
+    open-pull-requests-limit: 7
+    pull-request-branch-name:
+      separator: "-"
+
