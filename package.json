@@ -1,6 +1,6 @@
 {
   "name": "jackettapi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An api for 'Jackett' server requests",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -31,7 +31,7 @@
   "author": "STRDcoders",
   "license": "Apache-2.0",
   "dependencies": {
-    "axios": "^0.21.4",
+    "axios": "^0.27.2",
     "depcheck": "^1.4.1",
     "nyc": "^15.1.0",
     "source-map-support": "^0.5.19",
@@ -53,7 +53,7 @@
     "eslint": "^7.14.0",
     "eslint-plugin-jsdoc": "^32.0.2",
     "husky": "^4.3.0",
-    "mocha": "^8.2.1",
+    "mocha": "^10.0.0",
     "prettier": "2.2.1",
     "pretty-quick": "^3.1.0",
     "sinon": "^9.2.4",
