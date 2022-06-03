@@ -35,7 +35,7 @@
     "depcheck": "^1.4.1",
     "nyc": "^15.1.0",
     "source-map-support": "^0.5.19",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.8.0",
     "url-join": "^4.0.1",
     "xml2js": "^0.4.23"
   },
@@ -51,7 +51,7 @@
     "chai": "^4.3.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^7.14.0",
-    "eslint-plugin-jsdoc": "^32.0.2",
+    "eslint-plugin-jsdoc": "^39.3.2",
     "husky": "^4.3.0",
     "mocha": "^10.0.0",
     "prettier": "2.2.1",
