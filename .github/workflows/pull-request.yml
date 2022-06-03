@@ -42,8 +42,7 @@ jobs:
         run: npm run build
 
       - name: SonarCloud Scan
-#        continue only if user is not "dependabot"
-        if: ${{ $GITHUB_ACTOR }} != "dependabot"
+        if: ${{ GITHUB_ACTOR }} != "dependabot"
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
