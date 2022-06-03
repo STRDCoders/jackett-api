@@ -5,8 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts",
+    "dist/",
     "README.md"
   ],
   "scripts": {
@@ -15,7 +14,8 @@
     "start": "npm run build && npm run run",
     "test": "nyc mocha -r ts-node/register test/**/*.spec.ts --exit",
     "depcheck": "depcheck --ignores \"source-map-support,ts-node,@types/chai-http,prettier,pretty-quick,eslint-plugin-jsdoc\"",
-    "lint": "eslint \"./{src,test}/**/*.ts\""
+    "lint": "eslint \"./{src,test}/**/*.ts\"",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
