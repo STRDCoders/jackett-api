@@ -3,6 +3,7 @@
 [![CI](https://github.com/STRDCoders/jackett-api/actions/workflows/pull-request.yml/badge.svg)](https://github.com/STRDCoders/jackett-api/actions/workflows/pull-request.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=STRDCoders_jackett-api&metric=alert_status)](https://sonarcloud.io/dashboard?id=STRDCoders_jackett-api)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=STRDCoders_jackett-api&metric=coverage)](https://sonarcloud.io/dashboard?id=STRDCoders_jackett-api)
+[![npm](https://badgen.net/badge/npm/Jackett-api?icon=github)](https://www.npmjs.com/package/@strdcoders/jackett-api)
 ## Overview
 The package provides a simple API to communicate with a Jackett server.
 
