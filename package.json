@@ -1,6 +1,6 @@
 {
   "name": "jackett-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An api for 'Jackett' server requests",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
